@@ -1,4 +1,4 @@
-package dynamicProgramming;
+package dp1;
 import java.util.*;
 public class inho_Boj1463 {
 

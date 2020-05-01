@@ -1,4 +1,4 @@
-package dynamicProgramming;
+package dp1;
 import java.util.Scanner;
 public class Boj9465 {
 
