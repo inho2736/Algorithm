@@ -28,6 +28,7 @@ public class Boj2750_수정렬하기 {
 		for(int i=0; i<n; i++) {
 			System.out.println(arr[i]);
 		}
+		br.close();
 	}
 
 }

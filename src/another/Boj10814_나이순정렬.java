@@ -24,6 +24,7 @@ public class Boj10814_나이순정렬 {
 		for(int i=0; i<n; i++) {
 			System.out.println(st[i][0] + " " + st[i][1]);
 		}
+		br.close();
 	}
 
 }

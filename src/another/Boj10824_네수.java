@@ -1,7 +1,7 @@
 package another;
 import java.io.*;
 import java.util.*;
-public class f_Boj11004_K번째수 {
+public class Boj10824_네수 {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -9,13 +9,15 @@ public class f_Boj11004_K번째수 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
+		String string1 = "";
+		string1 += st.nextToken();
+		string1 += st.nextToken();
 		
-		st = new StringTokenizer(br.readLine());
-		for(int i=0; i<n; i++) {
-			
-		}
+		String string2 = "";
+		string2 += st.nextToken();
+		string2 += st.nextToken();
+		
+		System.out.println(Long.parseLong(string1)+ Long.parseLong(string2));
 		br.close();
 		bw.close();
 	}

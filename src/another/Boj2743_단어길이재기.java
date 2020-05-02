@@ -1,21 +1,15 @@
 package another;
 import java.io.*;
 import java.util.*;
-public class f_Boj11004_K번째수 {
+public class Boj2743_단어길이재기 {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
+		String st = br.readLine();
 		
-		st = new StringTokenizer(br.readLine());
-		for(int i=0; i<n; i++) {
-			
-		}
+		System.out.println(st.length());
 		br.close();
 		bw.close();
 	}

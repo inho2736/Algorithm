@@ -35,6 +35,7 @@ public class Boj10825_국영수 {
 		for(int i=0; i<n; i++) {
 			System.out.println(st[i][0]);
 		}
+		br.close();
 	}
 
 }

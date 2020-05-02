@@ -38,7 +38,8 @@ public class Boj11652_카드 {
 			}
 		}
 		System.out.println(max_key);
-		
+		br.close();
+		bw.close();
 	}
 
 }
