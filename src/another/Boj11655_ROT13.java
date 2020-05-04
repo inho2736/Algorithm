@@ -12,7 +12,6 @@ public class Boj11655_ROT13 {
 		
 		for(int i=0; i<st.length(); i++) {
 			char tmp = st.charAt(i);
-			//System.out.println(st.charAt(i));
 			if (tmp >= 'a' && tmp <= 'z') {
 				tmp += 13;
 				if(tmp > 'z') {
