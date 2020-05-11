@@ -1,7 +1,7 @@
 package another;
 import java.util.*;
 import java.io.*;
-public class Boj1918_후위표기식 {
+public class f_Boj1918_후위표기식 {
 
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
