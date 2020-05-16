@@ -25,40 +25,28 @@ public class Boj7576_토마토 {
 		}
 		
 		check = new boolean[n][m];
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				if(map[i][j] == 1 && check[i][j] == false) {
-					bfs(i, j);
-				}
-			}
-		}
-		int max = 0;
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				if(map[i][j]== 0) {
-					bw.write(-1+"\n");
-					bw.flush();
-					br.close();
-					bw.close();
-					return;
-				}
-				max = Math.max(max, map[i][j]);
-			}
-		}
-		bw.write(max+"\n");
+		
+		bw.write(bfs()+"\n");
 		bw.flush();
 		bw.close();
 		br.close();
 
 	}
 	
-	public static void bfs(int a, int b) {
+	public static int bfs() {
 		Queue<int []> queue = new LinkedList<int []>();
 		int [] dx = {0, 1, 0, -1};
 		int [] dy = {1, 0, -1, 0};
 		
-		queue.offer(new int [] {a, b});
-		check[a][b] = true;
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(map[i][j] == 1 && check[i][j] == false) {
+					queue.offer(new int [] {i, j});
+					check[i][j] = true;
+				}
+			}
+		}
 		
 		while(!queue.isEmpty()) {
 			int tmp[] = queue.poll();
@@ -77,10 +65,20 @@ public class Boj7576_토마토 {
 					queue.offer(new int [] {tmpx, tmpy});
 					check[tmpx][tmpy] = true;
 					map[tmpx][tmpy] = map[x][y] + 1;
-					//isChanged = true;
 				}
 			}
 		}
+		
+		int result=0;
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(map[i][j] == 0) {
+					return -1;
+				}
+				result = Math.max(result, map[i][j]);
+			}
+		}
+		return result-1;
 	}
 
 }
