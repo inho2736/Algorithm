@@ -10,7 +10,6 @@ public class Boj13460_구슬탈출 {
 	static int [] dx = {0, 1, 0, -1};
 	static int [] dy = {1, 0, -1, 0};
 	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
@@ -21,10 +20,10 @@ public class Boj13460_구슬탈출 {
 		map = new char [n][m];
 		check = new boolean [n][m];
 		
-		int rx;
-		int ry;
-		int bx;
-		int by;
+		int rx = 0;
+		int ry= 0;
+		int bx= 0;
+		int by= 0;
 		
 		for(int i=0; i<n; i++) {
 			String tmp = br.readLine();
@@ -53,35 +52,31 @@ public class Boj13460_구슬탈출 {
 				}
 			}
 		}
-		bfs(rx, ry, bx, by);
-		/*
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				bw.write(map[i][j] + " ");
-			}
-			bw.write("\n");
-		}*/
-		
-		
-		
+		bw.write(bfs(rx, ry, bx, by) + "\n");
 		br.close();
 		bw.flush();
 		bw.close();
 
 	}
 	private static int bfs(int a, int b, int c, int d) {
-		int count = 0;
+		int count = -1;
 		Queue <int []> queue = new LinkedList<int []>();
 		
 		queue.offer(new int [] {a, b, c, d, 0});
 		
-		while(queue.isEmpty()) {
+		loop:
+		while(!queue.isEmpty()) {
 			int [] tmp = queue.poll();
 			int rx = tmp[0];
 			int ry = tmp[1];
 			int bx = tmp[2];
 			int by = tmp[3];
 			int value = tmp[4];
+			
+			if(value >= 10) {
+				count = -1;
+				break;
+			}
 			
 			for(int i=0; i<4; i++) {
 				int tmpx = rx + dx[i];
@@ -91,16 +86,74 @@ public class Boj13460_구슬탈출 {
 					continue;
 				}
 				
-				if(map[tmpx][tmpy] == '.' || map[tmpx][tmpy] == 'O') {
+				if(map[tmpx][tmpy] == '.' || map[tmpx][tmpy] == 'O' ) {
+					
+					if (bx == tmpx && by == tmpy ) {
+						char pp = map[tmpx + dx[i]][tmpy + dy[i]];
+						if(map[tmpx + dx[i]][tmpy + dy[i]]== '#') {
+							continue;
+						}
+						;
+					}
 					// 새로운 빨간, 파란 구슬의 좌표를 얻음
 					// 거기에 회차수도 껴서 배열만들어 큐에 넣기
 					int [] next = goStraight(rx, ry, bx, by, i);
+					int [] renext = new int [5];
+					
+					if(next[0] == -1) {
+						continue;
+					}
+					else if(next[0] == 0) {
+						count = value + 1;
+						break loop;
+					}
+					renext[0] = next[0];
+					renext[1] = next[1];
+					renext[2] = next[2];
+					renext[3] = next[3];
+					renext[4] = value + 1;
+					queue.offer(renext);
+				}
+			}
+			for(int i=0; i<4; i++) {
+				int tmpx = bx + dx[i];
+				int tmpy = by + dy[i];
+				
+				if(tmpx < 0 || tmpy < 0 || tmpx >= n || tmpy >= m) {
+					continue;
+				}
+				
+				if(map[tmpx][tmpy] == '.' || map[tmpx][tmpy] == 'O' ) {
+					
+					if (rx == tmpx && ry == tmpy ) {
+						char pp = map[tmpx + dx[i]][tmpy + dy[i]];
+						if(map[tmpx + dx[i]][tmpy + dy[i]]== '#') {
+							continue;
+						}
+						;
+					}
+					int [] next = goStraight(rx, ry, bx, by, i);
+					int [] renext = new int [5];
+					
+					if(next[0] == -1) {
+						continue;
+					}
+					else if(next[0] == 0) {
+						count = value + 1;
+						break loop;
+					}
+					renext[0] = next[0];
+					renext[1] = next[1];
+					renext[2] = next[2];
+					renext[3] = next[3];
+					renext[4] = value + 1;
+					queue.offer(renext);
 				}
 			}
 		}
 		
 		
-		return 0;
+		return count;
 	}
 	private static int[] goStraight(int rx, int ry, int bx, int by, int i) {
 		// 구슬이 겹치지 않기 위해서..
@@ -118,6 +171,7 @@ public class Boj13460_구슬탈출 {
 			if(ry > by) {
 				// 빨간구슬 이동
 				redtmp = moveRed(rx, ry, bx, by, i);
+				
 				// 파란구슬 이동
 				bluetmp = moveBlue(redtmp[0], redtmp[1], bx, by, i);
 			}
@@ -160,7 +214,7 @@ public class Boj13460_구슬탈출 {
 
 			}
 		}
-		else if(i == 3) {
+		else {
 			if(rx > bx) {
 				// 파란구슬 이동
 				// 빨간구슬 이동
@@ -182,16 +236,24 @@ public class Boj13460_구슬탈출 {
 			blueFlag = true;
 		}
 		
-		if(redFlag) {
-			if(blueFlag) {
-				// 이 케이스는 넘어가야 함 
-			}
-			else {
-				// 성공한 케이스
-			}
+		int [] result = new int [4];
+		if(blueFlag) {
+			//큐에 안넣을 것이니 특정 값 넣기
+			result[0] = -1;
+		}
+		else if(redFlag) {
+			// 성공케이스 특정값 넣기
+			result[0] = 0;
+		}		
+		else {
+			//큐에 넣을 정상적인 값
+			result[0] = redtmp[0];
+			result[1] = redtmp[1];
+			result[2] = bluetmp[0];
+			result[3] = bluetmp[1];
 		}
 		
-		return;
+		return result;
 	}
 	private static int[] moveRed(int rx, int ry, int bx, int by, int i) {
 		int next_rx = rx ;
@@ -200,11 +262,13 @@ public class Boj13460_구슬탈출 {
 		boolean redFlag = false;
 		while(true) {
 			char tmp = map[next_rx + dx[i]][next_ry + dy[i]];
-			if(tmp == '#' || (next_rx == bx && next_ry == by)) {
+			if(tmp == '#' || (next_rx + dx[i] == bx && next_ry + dy[i]== by)) {
 				break;
 			}
 			else if(tmp == 'O'){
 				redFlag = true;
+				next_rx = 0;
+				next_ry = 0;
 				break;
 			}
 			next_rx += dx[i];
@@ -226,11 +290,13 @@ public class Boj13460_구슬탈출 {
 		boolean blueFlag = false;
 		while(true) {
 			char tmp = map[next_bx + dx[i]][next_by + dy[i]];
-			if(tmp == '#' || (next_bx == rx && next_by == ry)) {
+			if(tmp == '#' || (next_bx + dx[i] == rx && next_by+ dy[i] == ry)) {
 				break;
 			}
 			else if(tmp == 'O'){
 				blueFlag = true;
+				next_bx = 0;
+				next_by = 0;
 				break;
 			}
 			next_bx += dx[i];
