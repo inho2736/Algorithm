@@ -24,6 +24,7 @@ class Boj1436{
         bw.flush();
         bw.close();
     }
+    
     public static boolean calculate (int num){
         int count = 0;
         while(num > 0){

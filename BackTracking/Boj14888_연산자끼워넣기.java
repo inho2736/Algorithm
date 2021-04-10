@@ -1,4 +1,4 @@
-package Algorithm.BruteForce;
+package Algorithm.BackTracking;
 import java.util.*;
 import java.io.*;
 class Boj14888{

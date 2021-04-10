@@ -1,4 +1,4 @@
-package Stack;
+package Algorithm.Basic.Stack;
 import java.io.*;
 import java.util.*;
 
