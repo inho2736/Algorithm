@@ -1,4 +1,4 @@
-package Algorithm.Basic;
+package Algorithm.BruteForce;
 import java.util.*;
 class Solution {
     static public void main(String[] args){

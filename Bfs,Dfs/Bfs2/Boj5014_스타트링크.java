@@ -1,4 +1,3 @@
-package Bfs2;
 import java.util.*;
 import java.io.*;
 public class Boj5014_스타트링크 {
