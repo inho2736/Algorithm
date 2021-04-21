@@ -1,9 +1,5 @@
 {
-    "java.project.sourcePaths": [
-        "Basic/Hash",
-        "Basic/Basic",
-        "Basic/String"
-    ],
-    "java.format.settings.url": "eclipse-formatter.xml",
-    "editor.formatOnSave": true
+  "java.project.sourcePaths": ["Basic/Hash", "Basic/Basic", "Basic/String"],
+  "java.format.settings.url": "eclipse-formatter.xml",
+  "editor.formatOnSave": true
 }
