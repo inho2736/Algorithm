@@ -1,4 +1,3 @@
-package Algorithm.Basic.Basic;
 
 import java.io.*;
 class Boj14681{

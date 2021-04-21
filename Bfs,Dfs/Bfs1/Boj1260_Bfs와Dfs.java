@@ -1,4 +1,3 @@
-package Bfs1;
 import java.io.*;
 import java.util.*;
 public class Boj1260_Bfs와Dfs {

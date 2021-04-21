@@ -1,4 +1,4 @@
-package Bfs1;
+
 import java.util.*;
 import java.io.*;
 public class Boj1012_유기농배추 {

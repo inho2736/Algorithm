@@ -1,4 +1,3 @@
-package Bfs1;
 import java.util.*;
 import java.io.*;
 public class Boj2468_안전영역 {
