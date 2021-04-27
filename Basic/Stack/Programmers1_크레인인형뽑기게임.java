@@ -9,12 +9,35 @@ class sdf {
         board[3] = new int[] { 4, 2, 4, 4, 2 };
         board[4] = new int[] { 3, 5, 1, 3, 1 };
 
-        int [] moves = {1,5,3,5,1,2,1,4};
+        int[] moves = { 1, 5, 3, 5, 1, 2, 1, 4 };
         System.out.println(solution(board, moves));
 
     }
-
-    public static int solution(int [][] board, int [] moves) {
+    public int newSolution(int[][] board, int[] moves) {
+        int count = 0;
+        int n = board.length;
+        Stack <Integer> bucket = new Stack<Integer>();
+        
+        for(int i: moves){
+       
+            for(int j=0; j < n; j++){
+                if(board[j][i-1] != 0){
+                    int item = board[j][i-1];
+                    board[j][i-1] = 0;
+                    if(!bucket.isEmpty() && bucket.peek() == item){
+                        count++;
+                        bucket.pop();
+                    }else{
+                        bucket.push(item);
+                    }
+                    break;
+                }
+            }
+        }
+        return count*2;
+        
+    }
+    public static int solution(int[][] board, int[] moves) {
         int answer = 0;
         int n = board.length;
         ArrayList<Stack<Integer>> map = new ArrayList<>();
@@ -30,18 +53,18 @@ class sdf {
             }
         }
         // for(Stack<Integer> i: map){
-        //     while(!i.isEmpty()){
-        //         System.out.print(i.pop()+" ");
-        //     }
-        //     System.out.println();
+        // while(!i.isEmpty()){
+        // System.out.print(i.pop()+" ");
+        // }
+        // System.out.println();
         // }
         for (int i : moves) {
             int index = i - 1;
-            if(map.get(index).isEmpty()){
+            if (map.get(index).isEmpty()) {
                 continue;
             }
             int item = map.get(index).pop();
-            if (!bucket.empty()&& bucket.peek() == item) {
+            if (!bucket.empty() && bucket.peek() == item) {
                 answer++;
                 bucket.pop();
             } else {
@@ -49,7 +72,7 @@ class sdf {
             }
         }
 
-        return answer*2;
+        return answer * 2;
     }
 
 }
